@@ -1,4 +1,11 @@
-Canvas
-======
+# Canvas
 
-A javascript addition to the browser that creates events for adjusting browser size.
+Add a javascript event to the window of a browser which is fired on resize of the window.
+
+##Example
+The __breakevent__ is fired after a timeout.
+
+        window.addEventListener('breakevent', function(event) {
+            console.log(event.width);
+        });
+
