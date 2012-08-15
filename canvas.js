@@ -2,10 +2,9 @@
  * Author: <James Rickard> james@frodosghost.com
  * 
  * Project: Canvas
- * Version: 1.0.1
+ * Version: 1.1.0
  *
- * Description: Adds a resize event to the browser that triggers at specific dimensions.
- * This can be listened for in a javascript framework to adjust image sizes.
+ * Description: 
  * 
 */
 (function(){
@@ -14,26 +13,6 @@ var Canvas = {
     version:       '1.0.1',
     timeout:       null,
     timeout_limit: 100,
-    breakpoints: [
-        {
-            name: 'mobile',
-            max: 768
-        },
-        {
-            name: 'tablet',
-            min: 768,
-            max: 1027
-        },
-        {
-            name: 'desktop',
-            min: 1028,
-            max: 1823
-        },
-        {
-            name: 'large',
-            min: 1824
-        }
-    ],
 
     /**
      * Creates BreakEvent and fires attached to the window
@@ -46,7 +25,6 @@ var Canvas = {
             evt.initEvent('breakevent', true, true);
 
             evt.width = this.width();
-            evt.break = this.establish();
 
             window.dispatchEvent(evt);
         } else {
@@ -54,7 +32,6 @@ var Canvas = {
             evt.eventType = 'breakevent';
 
             evt.width = this.width();
-            evt.break = this.establish();
 
             window.fireEvent(evt.eventType, evt);
         }
@@ -82,26 +59,6 @@ var Canvas = {
         }
 
         return width;
-    },
-
-    /**
-     * Establishes the breakpoint name from array of objects
-     */
-    establish: function(width) {
-        var width = (typeof width == 'number') ? width : this.width(),
-            breakpoint_name = null;
-
-        for(var key in this.breakpoints) {
-            if (this.breakpoints.hasOwnProperty(key)) {
-                var breakpoint = this.breakpoints[key];
-
-                if (breakpoint.between(width)) {
-                    breakpoint_name = (typeof breakpoint.name == 'string') ? breakpoint.name : null;
-                }
-            }
-        }
-
-        return breakpoint_name;
     },
 
     /**
