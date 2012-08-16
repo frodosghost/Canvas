@@ -23,6 +23,7 @@ var Canvas = {
 
             // Set current width to MediaQuery
             media.set('width', this.width());
+            media.set('deviceWidth', window.screen.width);
 
         if (document.createEvent) {
             evt = document.createEvent('HTMLEvents');
@@ -78,9 +79,10 @@ var Canvas = {
 };
 
 var MediaQuery = {
-    version:  '1.0.0',
-    width:    null,
-    features: {minWidth: '>=', maxWidth: '<=', minDeviceWidth: '>=', maxDeviceWidth: '<=', orientation: '=='},
+    version:     '1.0.0',
+    width:       null,
+    deviceWidth: null,
+    features:    {minWidth: '>=', maxWidth: '<=', minDeviceWidth: '>=', maxDeviceWidth: '<=', orientation: '=='},
 
     /**
      * Determines if the Media Features are correctly defined in the .media.query() on the event
@@ -111,13 +113,19 @@ var MediaQuery = {
             if (this.features.hasOwnProperty(key)) {
                 switch (key) {
                     case 'minWidth':
-                        if (this.width <= parameters[key]) return false;
+                        if (!(this.width >= parameters[key])) return false;
                         break;
                     case 'maxWidth':
-                        if (this.width >= parameters[key]) return false;
+                        if (!(this.width <= parameters[key])) return false;
+                        break;
+                    case 'minDeviceWidth':
+                        if (!(parameters[key] >= this.deviceWidth)) return false;
+                        break;
+                    case 'maxDeviceWidth':
+                        if (!(parameters[key] <= this.deviceWidth)) return false;
                         break;
                     default:
-                        valid.push(false);
+                        return false;
                         break;
                 }
             }

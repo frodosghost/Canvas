@@ -8,5 +8,9 @@ The returned event contains a MediaQuery object. The query function takes an obj
         window.addEventListener('breakevent', function(event){
             if (event.media.query({minWidth: 0, maxWidth: 320})) {
                 console.log('Smartphones (portrait) -----------');
-            }
+            };
+
+            if (event.media.query({minDeviceWidth: 768, maxDeviceWidth: 1024})) {
+               console.log('iPads (portrait and landscape) -----------');
+            };
         });
