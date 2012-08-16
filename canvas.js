@@ -83,7 +83,7 @@ var Canvas = {
 };
 /**
  * MediaQuery
- *   - Version 1.1.0
+ *   - Version 1.1.1
  *   - Description: Determines from parameters if broswer matches media query
  */
 var MediaQuery = {
@@ -126,10 +126,10 @@ var MediaQuery = {
                         if (!(this.width <= parameters[key])) return false;
                         break;
                     case 'minDeviceWidth':
-                        if (!(parameters[key] >= this.deviceWidth)) return false;
+                        if (!(this.deviceWidth >= parameters[key])) return false;
                         break;
                     case 'maxDeviceWidth':
-                        if (!(parameters[key] <= this.deviceWidth)) return false;
+                        if (!(this.deviceWidth <= parameters[key])) return false;
                         break;
                     default:
                         return false;
