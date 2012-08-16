@@ -10,7 +10,7 @@
 (function(){
 
 var Canvas = {
-    version:       '1.0.1',
+    version:       '1.1.0',
     timeout:       null,
     timeout_limit: 100,
 
@@ -18,20 +18,24 @@ var Canvas = {
      * Creates BreakEvent and fires attached to the window
      */
     broadcast: function() {
-        var evt;
+        var evt,
+            media = MediaQuery;
+
+            // Set current width to MediaQuery
+            media.set('width', this.width());
 
         if (document.createEvent) {
             evt = document.createEvent('HTMLEvents');
             evt.initEvent('breakevent', true, true);
 
-            evt.width = this.width();
+            evt.media = media;
 
             window.dispatchEvent(evt);
         } else {
             evt = document.createEventObject();
             evt.eventType = 'breakevent';
 
-            evt.width = this.width();
+            evt.media = media;
 
             window.fireEvent(evt.eventType, evt);
         }
@@ -73,17 +77,62 @@ var Canvas = {
     },
 };
 
-// Determines if value exists between the Max and Min values provided in object
-Object.prototype.between = function(value) {
-    if (typeof this.min !== 'number') {
-        this.min = 0;
-    }
-    // If there is no max value in this array then we assume there is no high value
-    if (typeof this.max !== 'number') {
-        return (value >= this.min);
-    }
+var MediaQuery = {
+    version:  '1.0.0',
+    width:    null,
+    features: {minWidth: '>=', maxWidth: '<=', minDeviceWidth: '>=', maxDeviceWidth: '<=', orientation: '=='},
 
-    return (value > this.min && value <= this.max);
+    /**
+     * Determines if the Media Features are correctly defined in the .media.query() on the event
+     */
+    validate: function(parameters) {
+        for(var key in parameters) {
+            if (!(key in this.features)) {
+                throw new Error('The parameter "'+ key + '" does not exist in the Media Query Features.');
+            }
+        };
+
+        return this;
+    },
+
+    /**
+     * Initiates a media query.
+     * Evaluates object passed and returns boolean from passed parameters
+     */
+    query: function(parameters) {
+        var valid = [];
+        try {
+            this.validate(parameters);
+        } catch (e) {
+            if (console) console.log(e);
+        }
+
+        for (var key in parameters) {
+            if (this.features.hasOwnProperty(key)) {
+                switch (key) {
+                    case 'minWidth':
+                        if (this.width <= parameters[key]) return false;
+                        break;
+                    case 'maxWidth':
+                        if (this.width >= parameters[key]) return false;
+                        break;
+                    default:
+                        valid.push(false);
+                        break;
+                }
+            }
+        }
+
+        return true;
+    },
+
+    set: function(key, value) {
+        if (this.hasOwnProperty(key)) {
+            this[key] = value;
+        }
+
+        return this;
+    }
 };
 
 /**
@@ -102,4 +151,6 @@ Object.prototype.between = function(value) {
     };
 })();
 
+// Fire initial broadcast to establish browser width
+Canvas.broadcast();
 })();
