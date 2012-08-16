@@ -102,7 +102,6 @@ var MediaQuery = {
      * Evaluates object passed and returns boolean from passed parameters
      */
     query: function(parameters) {
-        var valid = [];
         try {
             this.validate(parameters);
         } catch (e) {
