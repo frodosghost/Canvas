@@ -3,12 +3,16 @@
  * 
  * Project: Canvas
  * Version: 1.1.0
- *
- * Description: 
+ * Description: Javascript emulation of CSS Media Queries. Broadcasts new event to browser window
+ * that can be listened to naturally or by external libaries.
  * 
 */
 (function(){
-
+/**
+ * Canvas
+ *   - Version: 1.1.0
+ *   - Description: Broadcasts a change in browser size and attaches a MediaQuery object to event.
+ */
 var Canvas = {
     version:       '1.1.0',
     timeout:       null,
@@ -77,9 +81,13 @@ var Canvas = {
         }, this.timeout_limit);
     },
 };
-
+/**
+ * MediaQuery
+ *   - Version 1.1.0
+ *   - Description: Determines from parameters if broswer matches media query
+ */
 var MediaQuery = {
-    version:     '1.0.0',
+    version:     '1.1.0',
     width:       null,
     deviceWidth: null,
     features:    {minWidth: '>=', maxWidth: '<=', minDeviceWidth: '>=', maxDeviceWidth: '<=', orientation: '=='},
