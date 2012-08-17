@@ -168,4 +168,7 @@ var MediaQuery = {
 
 // Fire initial broadcast to establish browser width
 Canvas.broadcast();
+
+// Attach Canvas to window so can fire event when setting up from external libraries
+window.canvas = Canvas;
 })();
