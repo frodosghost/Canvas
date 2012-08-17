@@ -3,6 +3,7 @@
  * 
  * Project: Canvas
  * Version: 1.1.0
+ *
  * Description: Javascript emulation of CSS Media Queries. Broadcasts new event to browser window
  * that can be listened to naturally or by external libaries.
  * 
