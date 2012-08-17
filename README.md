@@ -1,5 +1,5 @@
 # Canvas
-Another take at javascript CSS Media Queries. It adds a new event to the window, which is fired on resize of the window. The event includes a MediaQuery object that evaluates parameters as media queries.
+Another take at javascript CSS Media Queries for handling responsive websites. It adds a new event to the window, which is fired on resize of the window. The event includes a MediaQuery object that evaluates parameters as media queries.
 
 ## Setup
 You can include Canvas in the header or footer of your HTML page.
