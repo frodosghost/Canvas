@@ -78,3 +78,8 @@ The following code will enable the returned event in jQuery to work with the `bi
             console.log('iPads (portrait and landscape) -----------');
         }
     });
+
+## Changelog
+
+* 1.1.1 :: Updated ___broadcast___ function to include try/catch for IE8 issue.
+
