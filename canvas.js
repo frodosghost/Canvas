@@ -2,7 +2,7 @@
  * Author: <James Rickard> james@frodosghost.com
  * 
  * Project: Canvas
- * Version: 1.1.1
+ * Version: 1.1.2
  *
  * Description: Javascript emulation of CSS Media Queries. Broadcasts new event to browser window
  * that can be listened to naturally or by external libaries.
@@ -11,11 +11,11 @@
 (function(){
 /**
  * Canvas
- *   - Version: 1.1.1
+ *   - Version: 1.1.2
  *   - Description: Broadcasts a change in browser size and attaches a MediaQuery object to event.
  */
 var Canvas = {
-    version:       '1.1.1',
+    version:       '1.1.2',
     timeout:       null,
     timeout_limit: 100,
 
@@ -46,7 +46,7 @@ var Canvas = {
             try {
                 window.fireEvent(evt.eventType, evt);
             } catch(e) {
-                if (console) console.log(e);
+                if (typeof console !== 'undefined') console.log(e);
             }
         }
 
@@ -92,7 +92,7 @@ var Canvas = {
  *   - Description: Determines from parameters if broswer matches media query
  */
 var MediaQuery = {
-    version:     '1.1.0',
+    version:     '1.1.1',
     width:       null,
     deviceWidth: null,
     features:    {minWidth: '>=', maxWidth: '<=', minDeviceWidth: '>=', maxDeviceWidth: '<=', orientation: '=='},
@@ -118,7 +118,7 @@ var MediaQuery = {
         try {
             this.validate(parameters);
         } catch (e) {
-            if (console) console.log(e);
+            if (typeof console !== 'undefined') console.log(e);
         }
 
         for (var key in parameters) {
