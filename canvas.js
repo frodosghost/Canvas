@@ -1,12 +1,12 @@
 /**
  * Author: <James Rickard> james@frodosghost.com
- * 
+ *
  * Project: Canvas
  * Version: 1.1.2
  *
  * Description: Javascript emulation of CSS Media Queries. Broadcasts new event to browser window
  * that can be listened to naturally or by external libaries.
- * 
+ *
 */
 (function(){
 /**
@@ -85,6 +85,16 @@ var Canvas = {
             Canvas.broadcast();
         }, this.timeout_limit);
     },
+
+    /**
+     * Returns if device has touch
+     *
+     * @link   http://stackoverflow.com/a/4819886/174148
+     * @return boolean
+     */
+    istouchdevice: function () {
+        return !!('ontouchstart' in window) || !!('onmsgesturechange' in window);
+    }
 };
 /**
  * MediaQuery
