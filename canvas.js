@@ -2,21 +2,21 @@
  * Author: <James Rickard> james@frodosghost.com
  *
  * Project: Canvas
- * Version: 1.1.2
+ * Version: 1.1.3
  *
  * Description: Javascript emulation of CSS Media Queries. Broadcasts new event to browser window
  * that can be listened to naturally or by external libaries.
  *
-*/
+ */
 (function(){
 /**
  * Canvas
- *   - Version: 1.1.2
- *   - Description: Broadcasts a change in browser size and attaches a MediaQuery object to event.
+ * - Version: 1.1.3
+ * - Description: Broadcasts a change in browser size and attaches a MediaQuery object to event.
  */
 var Canvas = {
-    version:       '1.1.2',
-    timeout:       null,
+    version: '1.1.3',
+    timeout: null,
     timeout_limit: 100,
 
     /**
@@ -92,20 +92,40 @@ var Canvas = {
      * @link   http://stackoverflow.com/a/4819886/174148
      * @return boolean
      */
-    istouchdevice: function () {
+    isTouchDevice: function () {
         return !!('ontouchstart' in window) || !!('onmsgesturechange' in window);
+    },
+
+    /**
+     * Returns if the browser is retina display
+     *
+     * @link   http://stackoverflow.com/a/15335564/174148
+     * @return boolean
+     */
+    isRetina: function() {
+        var mediaQuery = "(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-resolution: 1.5dppx)";
+
+        if (root.devicePixelRatio > 1) {
+            return true;
+        }
+
+        if (root.matchMedia && root.matchMedia(mediaQuery).matches) {
+            return true;
+        }
+
+        return false;
     }
 };
 /**
  * MediaQuery
- *   - Version 1.1.1
- *   - Description: Determines from parameters if broswer matches media query
+ * - Version 1.1.1
+ * - Description: Determines from parameters if broswer matches media query
  */
 var MediaQuery = {
-    version:     '1.1.1',
-    width:       null,
+    version: '1.1.1',
+    width: null,
     deviceWidth: null,
-    features:    {minWidth: '>=', maxWidth: '<=', minDeviceWidth: '>=', maxDeviceWidth: '<=', orientation: '=='},
+    features: {minWidth: '>=', maxWidth: '<=', minDeviceWidth: '>=', maxDeviceWidth: '<=', orientation: '=='},
 
     /**
      * Determines if the Media Features are correctly defined in the .media.query() on the event

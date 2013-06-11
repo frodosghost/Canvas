@@ -49,7 +49,7 @@ At this stage the following code will enable the event to work with the Mootools
 
     window.addEvent('breakevent', function(event){
         if (event.media.query({maxWidth: 320})) {
-            console.log('Smartphones (portrait) -----------');     
+            console.log('Smartphones (portrait) -----------');
         }
     });
 
@@ -83,4 +83,5 @@ The following code will enable the returned event in jQuery to work with the `bi
 
 * 1.1.1 :: Updated ___broadcast___ function to include try/catch for IE8 issue.
 * 1.1.2 :: Updated to remove checking of __console__ without typeof which failed with errors in IE8.
+* 1.1.3 :: Updated to include function to check if touch device. Includes function to detemine if device has retina display
 
